@@ -47,18 +47,26 @@ hr{
     height: 300px;
     width: 300px;
 }
-#blog-book{
-    background-color: #F6F6F6;
+#profiles-fyi{
+	background-color: #F6F6F6;
 }
+#profiles-fyi h2{
+	color: black;
+}
+	
 #blog-book h2{
     color: black;
 }
 #blog-book p{
     color: #6C5B7B;
 }
+#lets-chat{
+	background-color: #F6F6F6;
+}
 #lets-chat h2{
     color: black;
 }
+
 #wustl-courses h2{
     color: black;
 }
@@ -74,4 +82,13 @@ hr{
 }
 .project-image{
     max-width: 100%;
+}
+.paper{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+footer{
+    margin: 50px;
+    text-align: center;
 }
