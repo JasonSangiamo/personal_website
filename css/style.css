@@ -1,94 +1,102 @@
-#name-text{
-    font-size: 2em;
-    color: #f67280;
-    font-weight: bold;
+#name-text {
+  font-size: 2em;
+  color: #f67280;
+  font-weight: bold;
 }
-.nav-link{
-    padding-right: 5px;
-    padding-left: 5px;
-    padding-top: 5px;
-    padding-bottom: 0px;
+.nav-link {
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 0px;
 }
-nav{
-    border-bottom: 1px solid grey;
-    font-family: tahoma sans-serif;
+nav {
+  border-bottom: 1px solid grey;
+  font-family: tahoma sans-serif;
 }
-embed{
-    width: 95%;
-    height: 1000px;
-    padding-left: 10%;
+embed {
+  width: 95%;
+  height: 1000px;
+  padding-left: 10%;
 }
-.nav-link{
-    color: #6C5B7B
-}
-
-p{
-    font-size: 1.5em;
-    font-family: tahoma sans-serif;
-    margin-bottom: 0;
-	text-align: justify;
-    color: #6C5B7B;
+.nav-link {
+  color: #6c5b7b;
 }
 
-h1, h2, h3, h4, h5, h6 {
+p {
+  font-size: 1.5em;
+  font-family: tahoma sans-serif;
+  margin-bottom: 0;
+  text-align: justify;
+  color: #6c5b7b;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #f67280;
   font-weight: bold;
   padding-bottom: 20px;
 }
-hr{
-    border-color: #C06C84;
+hr {
+  border-color: #c06c84;
 }
-#body-content{
-    padding-top: 20px;
+#body-content {
+  padding-top: 20px;
 }
-#me{
-    margin-top: 100px;
-    border-radius: 20%;
-    height: 300px;
-    width: 300px;
+#me {
+  margin-top: 100px;
+  border-radius: 20%;
+  height: 300px;
+  width: 300px;
 }
-#profiles-fyi{
-	background-color: #F6F6F6;
+#home-about-me {
+  padding-top: 30px;
 }
-#profiles-fyi h2{
-	color: black;
+#profiles-fyi {
+  background-color: #f6f6f6;
 }
-	
-#blog-book h2{
-    color: black;
-}
-#blog-book p{
-    color: #6C5B7B;
-}
-#lets-chat{
-	background-color: #F6F6F6;
-}
-#lets-chat h2{
-    color: black;
+#profiles-fyi h2 {
+  color: black;
 }
 
-#wustl-courses h2{
-    color: black;
+#blog-book h2 {
+  color: black;
 }
-#projects-intro{
-    padding-bottom: 30px;
+#blog-book p {
+  color: #6c5b7b;
 }
-#projects-intro-wrapper{
-    background-color: #F6F6F6;
+#lets-chat {
+  background-color: #f6f6f6;
 }
-.project{
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-.project-image{
-    max-width: 100%;
-}
-.paper{
-    padding-top: 30px;
-    padding-bottom: 30px;
+#lets-chat h2 {
+  color: black;
 }
 
-footer{
-    margin: 50px;
-    text-align: center;
+#wustl-courses h2 {
+  color: black;
+}
+#projects-intro {
+  padding-bottom: 30px;
+}
+#projects-intro-wrapper {
+  background-color: #f6f6f6;
+}
+.project {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.project-image {
+  max-width: 100%;
+}
+.paper {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+footer {
+  margin: 50px;
+  text-align: center;
 }
