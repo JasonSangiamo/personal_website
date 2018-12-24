@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <style>
+      body {
+        background: #111;
+      }
+
+      .container {
+        /*centers in the container*/
+        text-align: center;
+      }
+
+      div.circTxt {
+        /*allows for centering*/
+        display: inline-block;
+        /*adjust as needed*/
+        margin-bottom: 128px;
+        color: whitesmoke;
+      }
+      #inner {
+        color: red;
+        position: absolute;
+        top: 100px;
+        margin-left: 60px;
+        font-size: 40px;
+      }
+      #outer {
+        color: blue;
+        position: absolute;
+        margin-left: 60px;
+        font-size: 40px;
+      }
+      #info {
+        color: white;
+        position: absolute;
+        margin-left: 60px;
+        padding-top: 200px;
+      }
+      #find-red {
+        display: none;
+      }
+      #find-blue {
+        display: none;
+      }
+      #blue {
+        color: blue;
+      }
+      #red {
+        color: red;
+      }
+      .progressbar {
+        width: 80%;
+        margin: 25px auto;
+        border: solid 1px #000;
+      }
+      .progressbar .inner {
+        height: 15px;
+        animation: progressbar-countdown;
+        /* Placeholder, this will be updated using javascript */
+        animation-duration: 40s;
+        /* We stop in the end */
+        animation-iteration-count: 1;
+        /* Stay on pause when the animation is finished finished */
+        animation-fill-mode: forwards;
+        /* We start paused, we start the animation using javascript */
+        animation-play-state: paused;
+        /* We want a linear animation, ease-out is standard */
+        animation-timing-function: linear;
+      }
+      @keyframes progressbar-countdown {
+        0% {
+          width: 100%;
+          background: #0f0;
+        }
+        100% {
+          width: 0%;
+          background: #f00;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- the holders for the text, reuse as desired -->
+      <div class="circTxt" id="outer"></div>
+      <div class="circTxt" id="inner"></div>
+      <form action="" method="GET">
+        <input type="text" id="guess" placeholder="Enter the word here"/> <input type="submit" id="submit">Subimit</button>
+      </form>
+      <h1 id="info">
+        <span id="score">Current Score: 0</span> <br />
+        <span id="find-red">Find <span id="red">Red</span> Word</span>
+        <span id="find-blue">Find <span id="blue">Blue</span> Word</span> <br />
+        <span id="timer"></span>
+        <br>
+        <span id="previous"></span>
+      </h1>
+    </div>
+
+    <script>
+      /*
+       *  Creates a progressbar.
+       *  @param id the id of the div we want to transform in a progressbar
+       *  @param duration the duration of the timer example: '10s'
+       *  @param callback, optional function which is called when the progressbar reaches 0.
+       */
+      function createProgressbar(id, duration, callback) {
+        // We select the div that we want to turn into a progressbar
+        var progressbar = document.getElementById(id);
+        progressbar.className = "progressbar";
+
+        // We create the div that changes width to show progress
+        var progressbarinner = document.createElement("div");
+        progressbarinner.className = "inner";
+
+        // Now we set the animation parameters
+        progressbarinner.style.animationDuration = duration;
+
+        // Eventually couple a callback
+        if (typeof callback === "function") {
+          progressbarinner.addEventListener("animationend", callback);
+        }
+
+        // Append the progressbar to the main progressbardiv
+        progressbar.appendChild(progressbarinner);
+
+        // When everything is set up we start the animation
+        progressbarinner.style.animationPlayState = "running";
+      }
+      function circularText(txt, radius, classIndex) {
+        (txt = txt.split("")),
+          (classIndex = document.getElementsByClassName("circTxt")[classIndex]);
+
+        var deg = 360 / txt.length,
+          origin = 0;
+
+        txt.forEach(ea => {
+          ea = `<p style='height:${radius}px;position:absolute;transform:rotate(${origin}deg);transform-origin:0 100%'>${ea}</p>`;
+          classIndex.innerHTML += ea;
+          origin += deg;
+        });
+      }
+
+      function shiftWord(word) {
+        var min = 0;
+        var max = word.length - 1;
+        var newStartIndex = Math.floor(Math.random() * (+max - +min)) + +min;
+
+        var newString = "";
+        for (var i = 0; i < word.length; i++) {
+          newString += word.charAt((newStartIndex + i) % word.length);
+        }
+        return newString;
+      }
+
+      var correctWord;
+      var score = 0;
+
+      function clearBetweenRounds() {
+        $("#inner").empty();
+        $("#outer").empty();
+        $("#timer").empty();
+        $("#guess").val("");
+        $("#score").html("Current Score: " + score);
+        $("#previous").html("Previous Word: " + correctWord);
+      }
+
+      function round(words) {
+        var min = 0;
+        var max = words.length;
+
+        var randomInner = Math.floor(Math.random() * (+max - +min)) + +min;
+        var randomOuter = Math.floor(Math.random() * (+max - +min)) + +min;
+
+        var innerWord = words[randomInner];
+        var outerWord = words[randomOuter];
+
+        circularText(shiftWord(outerWord), 200, 0);
+        circularText(shiftWord(innerWord), 100, 1);
+
+        var innerWordChosen = Math.random() >= 0.5;
+
+        if (innerWordChosen) {
+          correctWord = innerWord;
+          $("#find-red").show();
+          $("#find-blue").hide();
+        } else {
+          correctWord = outerWord;
+          $("#find-blue").show();
+          $("#find-red").hide();
+        }
+
+        createProgressbar("timer", "5s", function() {
+          score -= 1;
+          clearBetweenRounds();
+          round(words);
+          return;
+        });
+      }
+      var words = [
+        "onion",
+        "tomato",
+        "pasta",
+        "fluffy",
+        "amazing",
+        "newton",
+        "treasure",
+        "becoming",
+        "belittle",
+        "brave",
+        "courage",
+        "heart",
+        "lonely",
+        "pardon",
+        "boring",
+        "barly",
+        "baron",
+        "bastion",
+        "party"
+      ];
+
+      $("#submit").on("click", function(e) {
+        e.preventDefault();
+        if ($("#guess").val() === correctWord) {
+          score += 1;
+          clearBetweenRounds();
+          round(words);
+        } else {
+          score -= 1;
+          clearBetweenRounds();
+          round(words);
+        }
+      });
+      round(words);
+    </script>
+  </body>
+</html>
